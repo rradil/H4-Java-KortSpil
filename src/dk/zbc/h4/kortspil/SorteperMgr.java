@@ -10,7 +10,25 @@ package dk.zbc.h4.kortspil;
  * @author runra
  */
 public class SorteperMgr extends KortspilMgr {
-    public void startSpil() {};
-    public void slutSpil() {};
     
+   private static SorteperMgr instance = null;
+   protected SorteperMgr() {
+      
+   }
+   public static SorteperMgr getInstance() {
+      if(instance == null) {
+         instance = new SorteperMgr();
+      }
+      return instance;
+      
+   }
+   public void startSpil() {};
+   /**
+    * Denne metode kaldes når spillet skal afsluttes. 
+    */
+   public void slutSpil() {};
+   
+   public static void main(String[] args) {} 
+   
 }
+    
