@@ -20,7 +20,7 @@ public class Kort {
         this.kuloer = kuloer;
     }
 
-    private static enum Kuloer {
+    public static enum Kuloer {
         KLOER, HJERTER, SPAR, RUDER, JOKER
     }
     private int vaerdi;
@@ -31,4 +31,6 @@ public class Kort {
         this.setKuloer(kuloer);
         this.setVaerdi(vaerdi);
     }
+
+
 }
