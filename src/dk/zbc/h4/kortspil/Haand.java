@@ -1,5 +1,4 @@
 package dk.zbc.h4.kortspil;
-
 import java.util.ArrayList;
 
 /**
@@ -8,17 +7,17 @@ import java.util.ArrayList;
 public class Haand {
     private ArrayList<Kort> kort = new ArrayList<Kort>();
     public Kort tagKort(int index) {
-        //TODO Skift værdi
+        //TODO Skift vÃ¦rdi
         return null;
     }
 
     public Kort fjernKort(int index) {
-        // TODO Skift værdi
+        // TODO Skift vÃ¦rdi
         return null;
     }
 
     public Kort modtagKort(Kort kort) {
-        // TODO Skift værdi
+        // TODO Skift vÃ¦rdi
         this.kort.add(kort);
         return kort;
     }
