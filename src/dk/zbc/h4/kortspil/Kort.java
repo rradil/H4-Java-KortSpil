@@ -33,28 +33,11 @@ public class Kort {
     public void setKuloer(Kuloer kuloer) {
         this.kuloer = kuloer;
     }
-<<<<<<< HEAD
-
-    public static enum Kuloer {
-        KLOER, HJERTER, SPAR, RUDER, JOKER
-    }
-    private int vaerdi;
-    private Kuloer kuloer;
-
-    public Kort(int vaerdi, Kuloer kuloer)
-    {
-        this.setKuloer(kuloer);
-        this.setVaerdi(vaerdi);
-    }
-
-
-=======
     
     public String toString() {
         
         //return "Værdi: " + vaerdi + ", Kulør;" + kuloer.toString();
         return kuloer.toString() + " " +  vaerdi;
     }
-    
->>>>>>> pr/4
+
 }

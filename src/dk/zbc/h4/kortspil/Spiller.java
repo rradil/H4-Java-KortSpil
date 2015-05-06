@@ -7,15 +7,25 @@ public class Spiller {
     
     private String navn;
     private Haand hand;
+    private String userID;
     
-    public Spiller(String navn) {
+    public Spiller(String navn, String userID) {
         this.navn = navn;
         this.hand = new Haand();
+        this.userID = userID;
     }
 
     public String getNavn() {
         return navn;
     }
 
-    //Findstik
+
+
+    public String getUserID() {
+        return userID;
+    }
+    //TODO
+    //finduserID
+
+    public Haand getHaand() { return hand; }
 }
