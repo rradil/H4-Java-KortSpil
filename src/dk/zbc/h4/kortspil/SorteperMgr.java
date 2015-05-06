@@ -1,4 +1,6 @@
 package dk.zbc.h4.kortspil;
+import sun.security.provider.ConfigFile;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -11,9 +13,10 @@ import java.util.Random;
 public class SorteperMgr extends KortspilMgr {
     
     private static SorteperMgr instance = null;
+    private ArrayList<Spiller> spillerListe = null;
     
-    protected SorteperMgr() {
-        
+    private SorteperMgr() {
+        spillerListe = new ArrayList<Spiller>();
     }
     
     public static SorteperMgr getInstance() {
@@ -23,7 +26,6 @@ public class SorteperMgr extends KortspilMgr {
         return instance;
     }
 
-    private ArrayList<Spiller> spillerListe = new ArrayList<Spiller>();
     
     public void startSpil() {
 
@@ -54,23 +56,37 @@ public class SorteperMgr extends KortspilMgr {
         dk.tilfoejKort(new Kort(15, Kort.Kuloer.JOKER));
 
                 // Print, shuffle, print
+        long seed = System.nanoTime();
+        Collections.shuffle(dk, new Random(seed));
+        System.err.println(dk.size());
 
-        while (dk.size() > 0) {
+        for (int i = 0; i< dk.size(); i++) {
             //Uddeler kort..
             for(Spiller s : spillerListe){
-                Kort k = dk.get(0);
-                dk.remove(0);
+                //System.err.println(dk.size());
+                Kort k = dk.get(i);
                 s.getHaand().tilfoejKort(k);
+                //dk.remove(i);
             }
         }
-
-                long seed = System.nanoTime();
-                Collections.shuffle(dk, new Random(seed));
+        dk.clear();
 
 
             }
 
     public void slutSpil() {};
+
+    public Spiller getSpiller(String sessionId) {
+        Spiller returSpiller = null;
+        for(Spiller s : spillerListe)
+        {
+            if(s.getUserID() == sessionId) {
+                returSpiller = s;
+                break;
+            }
+        }
+        return returSpiller;
+    }
 
     public static void main(String[] args) {
         SorteperMgr.getInstance().startSpil();
