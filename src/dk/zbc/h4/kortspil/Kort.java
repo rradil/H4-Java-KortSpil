@@ -4,6 +4,13 @@ package dk.zbc.h4.kortspil;
  * Created by Niklas on 04-05-2015.
  */
 public class Kort {
+    
+    public String toString() {
+        
+        //return "Værdi: " + vaerdi + ", Kulør;" + kuloer.toString();
+        return kuloer.toString() + " " +  vaerdi; 
+    }
+    
     public int getVaerdi() {
         return vaerdi;
     }
@@ -20,7 +27,7 @@ public class Kort {
         this.kuloer = kuloer;
     }
 
-    private static enum Kuloer {
+    public static enum Kuloer {
         KLOER, HJERTER, SPAR, RUDER, JOKER
     }
     private int vaerdi;
@@ -31,4 +38,6 @@ public class Kort {
         this.setKuloer(kuloer);
         this.setVaerdi(vaerdi);
     }
+
+
 }
