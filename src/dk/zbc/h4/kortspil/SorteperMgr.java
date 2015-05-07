@@ -60,14 +60,20 @@ public class SorteperMgr extends KortspilMgr {
         Collections.shuffle(dk, new Random(seed));
         System.err.println(dk.size());
 
-        for (int i = 0; i< dk.size(); i++) {
+        int intCounter = 0;
+
+        for (int i = 0; i< dk.size(); i++){
             //Uddeler kort..
             for(Spiller s : spillerListe){
                 //System.err.println(dk.size());
-                Kort k = dk.get(i);
-                s.getHaand().tilfoejKort(k);
-                //dk.remove(i);
+                if(intCounter < dk.size()) {
+                    Kort k = dk.get(intCounter);
+                    s.getHaand().tilfoejKort(k);
+                    //dk.remove(i);
+                    intCounter++;
+                }
             }
+            //dk.remove(i);
         }
         dk.clear();
 
@@ -80,7 +86,7 @@ public class SorteperMgr extends KortspilMgr {
         Spiller returSpiller = null;
         for(Spiller s : spillerListe)
         {
-            if(s.getUserID() == sessionId) {
+            if(s.getUserID().equals(sessionId)) {
                 returSpiller = s;
                 break;
             }
