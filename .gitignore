@@ -4,7 +4,6 @@ out/
 .iml
 
 # Netbeans specific
-# Everything in nbproject besides...
 nbproject/*
 !nbproject/project.properties
 !nbproject/project.xml
