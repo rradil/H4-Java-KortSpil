@@ -18,7 +18,8 @@ nb-configuration.xml
 .nb-gradle/
 
 # Eclipse specific
-# Todo
+.metadata/
+*.project
 
 # Class files
 *.class
