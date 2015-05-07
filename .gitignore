@@ -1,6 +1,7 @@
 # IntelliJ specific
 .idea/
 out/
+.iml
 
 # Netbeans specific
 # Everything in nbproject besides...
