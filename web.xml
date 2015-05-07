@@ -16,4 +16,13 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
         <servlet-name>giv-kort</servlet-name>
         <url-pattern>/givkort</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>vis-kort</servlet-name>
+        <servlet-class>dk.zbc.h4.kortspil.servlet.VisKortServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>vis-kort</servlet-name>
+        <url-pattern>/viskort</url-pattern>
+    </servlet-mapping>
     </web-app>

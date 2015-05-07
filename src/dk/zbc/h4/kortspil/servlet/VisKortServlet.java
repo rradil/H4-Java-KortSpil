@@ -16,7 +16,8 @@ public class VisKortServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
+        //TODO denne metode skal ikke kaldes her
+        SorteperMgr.getInstance().startSpil();
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +32,9 @@ public class VisKortServlet extends HttpServlet {
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // TODO Get session IDs
-        String sessionId = "2";
+        String sessionId = "1";
         Spiller thisSpiller = SorteperMgr.getInstance().getSpiller(sessionId);
-        String sessionId1 = "3";
+        String sessionId1 = "2";
         Spiller nextSpiller = SorteperMgr.getInstance().getSpiller(sessionId1);
 
         int cardAmount = nextSpiller.getHaand().size();
