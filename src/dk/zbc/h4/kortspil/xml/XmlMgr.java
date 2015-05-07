@@ -23,6 +23,13 @@ public class XmlMgr {
         return instance;
     }
 
+    public String transformNumber(int number) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getHeader());
+        sb.append("<number>" + number + "</number>");
+        return sb.toString();
+    }
+
     public String transformKort(Deck dk) {
         StringBuffer sb = new StringBuffer();
         /* <kort>
