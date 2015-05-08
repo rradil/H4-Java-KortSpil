@@ -3,11 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-    <!--
-
-   Copyright 2006, 2010 Oracle Corporation. All rights reserved.
-
--->
+    <!-- Copyright 2006, 2010 Oracle Corporation. All rights reserved. -->
     <servlet>
         <servlet-name>giv-kort</servlet-name>
         <servlet-class>dk.zbc.h4.kortspil.servlet.Givkortservlet</servlet-class>
@@ -16,7 +12,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
         <servlet-name>giv-kort</servlet-name>
         <url-pattern>/givkort</url-pattern>
     </servlet-mapping>
-<<<<<<< HEAD
+
     <servlet>
         <servlet-name>spil</servlet-name>
         <servlet-class>dk.zbc.h4.kortspil.servlet.Spilservlet</servlet-class>
@@ -24,7 +20,6 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     <servlet-mapping>
         <servlet-name>spil</servlet-name>
         <url-pattern>/spil</url-pattern>
-=======
 
     <servlet>
         <servlet-name>vis-kort</servlet-name>
@@ -33,6 +28,5 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     <servlet-mapping>
         <servlet-name>vis-kort</servlet-name>
         <url-pattern>/viskort</url-pattern>
->>>>>>> origin/master
     </servlet-mapping>
     </web-app>
