@@ -18,7 +18,7 @@ public class SorteperMgr extends KortspilMgr {
     private SorteperMgr() {
         spillerListe = new ArrayList<Spiller>();
     }
-    
+
     public static SorteperMgr getInstance() {
         if(instance == null) {
             instance = new SorteperMgr();
