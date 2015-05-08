@@ -1,8 +1,10 @@
 package dk.zbc.h4.kortspil.xml;
 
 import dk.zbc.h4.kortspil.Deck;
+import dk.zbc.h4.kortspil.Spiller;
 import dk.zbc.h4.kortspil.Haand;
 import dk.zbc.h4.kortspil.Kort;
+import sun.security.provider.ConfigFile;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,18 @@ public class XmlMgr {
                     "                </kort>");
         }
         sb.append("</kortListe>");
+        return sb.toString();
+    }
+    public String transformNuvaerendeSpiller(Spiller spiller) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getHeader());
+        sb.append("<spiller>");
+        sb.append("<person>");
+        sb.append("<navn>" + spiller.getNavn() + "</navn>");
+        sb.append("<uid>" + spiller.getUserID() + "</uid>");
+        sb.append("</person>");
+        sb.append("</spiller>");
+
         return sb.toString();
     }
 

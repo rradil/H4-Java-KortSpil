@@ -94,6 +94,17 @@ public class SorteperMgr extends KortspilMgr {
         return returSpiller;
     }
 
+    public Spiller nuvaerendeSpiller() {
+        return spillerListe.get(0);
+    }
+
+    public Spiller naesteSpiller() {
+        return spillerListe.get(1);
+    }
+    public ArrayList<Spiller> flytSpillere() {
+        return null;
+    }
+
     public static void main(String[] args) {
         SorteperMgr.getInstance().startSpil();
     }
