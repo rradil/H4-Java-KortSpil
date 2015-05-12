@@ -5,7 +5,6 @@ import dk.zbc.h4.kortspil.Spiller;
 import dk.zbc.h4.kortspil.Haand;
 import dk.zbc.h4.kortspil.Kort;
 import sun.security.provider.ConfigFile;
-
 import java.util.ArrayList;
 
 /**

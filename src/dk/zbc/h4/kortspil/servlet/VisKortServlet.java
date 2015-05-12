@@ -29,13 +29,17 @@ public class VisKortServlet extends HttpServlet {
         doService(req, resp);
     }
 
+    // Outputs amount of cards for next player
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // TODO Get session IDs
+        // TODO Get session ID of current player
+        // Get current player
         String sessionId = "1";
         Spiller thisSpiller = SorteperMgr.getInstance().getSpiller(sessionId);
-        String sessionId1 = "2";
-        Spiller nextSpiller = SorteperMgr.getInstance().getSpiller(sessionId1);
+        
+        // Get next player
+        int nextIdx = SorteperMgr.getInstance().getNextPlayerIndex(thisSpiller);
+        Spiller nextSpiller = SorteperMgr.getInstance().getPlayerByIndex(nextIdx);
 
         int cardAmount = nextSpiller.getHaand().size();
         String content = XmlMgr.getInstance().transformNumber(cardAmount);
