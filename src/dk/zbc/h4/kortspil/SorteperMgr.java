@@ -91,6 +91,7 @@ public class SorteperMgr extends KortspilMgr {
         return returSpiller;
     }
     
+    // TODO Rewrite
     public Spiller nuvaerendeSpiller() {
         return spillerListe.get(0);
     }

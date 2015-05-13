@@ -31,13 +31,14 @@ public class Givkortservlet extends HttpServlet {
     }
 
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO SessionID &/ user validation
         String sessionId = null;
         if(req.getParameter("uid")!= null) {
             sessionId = req.getParameter("uid");
             System.err.println(req.getParameter("uid"));
         }
         Spiller enSpiller = SorteperMgr.getInstance().getSpiller(sessionId);
-        String content = XmlMgr.getInstance().transformKort(enSpiller.getHaand());
+        String content = XmlMgr.getInstance().transformCard(enSpiller.getHaand());
         resp.setContentType("text/xml");
         resp.getOutputStream().print(content);
     }
