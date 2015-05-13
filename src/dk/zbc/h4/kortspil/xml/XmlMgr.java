@@ -2,9 +2,8 @@ package dk.zbc.h4.kortspil.xml;
 
 import dk.zbc.h4.kortspil.Deck;
 import dk.zbc.h4.kortspil.Spiller;
-import dk.zbc.h4.kortspil.Haand;
 import dk.zbc.h4.kortspil.Kort;
-import sun.security.provider.ConfigFile;
+
 import java.util.ArrayList;
 
 /**
@@ -132,6 +131,7 @@ public class XmlMgr {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     }
     
+
      /** Tranform a single card to XML without header
      * @param card
      * @return Returns the card formatted as an XML String. This string does not contain an XML header.
@@ -140,6 +140,23 @@ public class XmlMgr {
         return "<kort>\n" +
                 "        <kuloer>" + card.getKuloer() + "</kuloer>\n" +
                 "        <vaerdi>" + card.getVaerdi() + "</vaerdi>\n" +
-                "                </kort>";
+                "        </kort>";
+        
+    public String transformListSpillere(ArrayList<Spiller> spillerList) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(getHeader());
+        sb.append("<spillere>");
+        
+        for (Spiller spiller : spillerList) {
+            sb.append("<person>\n" +
+                "<navn>" + spiller.getNavn() + "</navn>" +
+                "<klar>" + spiller.erKlar() + "</klar>" +
+                "<antalKort>" + (spiller.getHaand().size()) + "</antalKort>\n" +
+            "</person>");
+        }
+        sb.append("</spiller>");
+
+        return sb.toString();
+
     }
 }

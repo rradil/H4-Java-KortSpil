@@ -1,5 +1,4 @@
 package dk.zbc.h4.kortspil;
-import sun.security.provider.ConfigFile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -198,6 +197,11 @@ public class SorteperMgr extends KortspilMgr {
     
     public static void main(String[] args) {
         SorteperMgr.getInstance().startSpil();
+    }
+    
+    //Lister spillerene
+    public ArrayList<Spiller> listSpillere() {
+        return spillerListe;        
     }
 }
 
