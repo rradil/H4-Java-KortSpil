@@ -17,6 +17,10 @@ public class XmlMgr {
         
     }
     
+    /** Get the current instance of the XmlMgr
+     * Get the current running instance of the XmlMgr or create a new instance if an instance doesn't exist.
+     * @return Returns the current instance of the XmlMgr.
+     */
     public static XmlMgr getInstance() {
         if(instance == null) {
             instance = new XmlMgr();
@@ -24,6 +28,10 @@ public class XmlMgr {
         return instance;
     }
     
+    /** Tranform a number to XML
+     * @param number
+     * @return Returns the number formatted as an XML String.
+     */
     public String transformNumber(int number) {
         StringBuffer sb = new StringBuffer();
         sb.append(getHeader());
@@ -31,7 +39,9 @@ public class XmlMgr {
         return sb.toString();
     }
     
-    /**
+    /** Transform a card collection to XML
+     * @param dk A deck or hand of cards
+     * @return Returns the card collection formatted as an XML String.
      * @deprecated Use transformCard instead
      */
     public String transformKort(Deck dk) {
@@ -45,6 +55,10 @@ public class XmlMgr {
         return sb.toString();
     }
     
+    /** Tranform a card collection to XML
+     * @param dk A deck or hand of cards
+     * @return Returns the card collection formatted as an XML String.
+     */
     public String transformCard(Deck dk) {
         StringBuffer sb = new StringBuffer();
         sb.append(getHeader());
@@ -56,6 +70,10 @@ public class XmlMgr {
         return sb.toString();
     }
     
+    /** Tranform a single card to XML
+     * @param card
+     * @return Returns the card formatted as an XML String.
+     */
     public String transformCard(Kort card) {
         StringBuffer sb = new StringBuffer();
         sb.append(getHeader());
@@ -63,6 +81,10 @@ public class XmlMgr {
         return sb.toString();
     }
     
+    /** Tranform an error message string to XML
+     * @param errorMessage 
+     * @return Returns the error message formatted as an XML String.
+     */
     public String transformError(String errorMessage) {
         StringBuffer sb = new StringBuffer();
         sb.append(getHeader());
@@ -85,10 +107,17 @@ public class XmlMgr {
         return sb.toString();
     }
     
+    /** Get the XML header 
+     * @return Returns the XML header used in all XML documents.
+     */
     private String getHeader() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     }
     
+     /** Tranform a single card to XML without header
+     * @param card
+     * @return Returns the card formatted as an XML String. This string does not contain an XML header.
+     */
     private String transformSingleCard(Kort card) {
         return "<kort>\n" +
                 "        <kuloer>" + card.getKuloer() + "</kuloer>\n" +

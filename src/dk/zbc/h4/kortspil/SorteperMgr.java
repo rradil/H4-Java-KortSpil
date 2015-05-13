@@ -18,6 +18,10 @@ public class SorteperMgr extends KortspilMgr {
         spillerListe = new ArrayList<Spiller>();
     }
     
+    /** Get the current instance of the SorteperMgr
+     * Get the current running instance of the SorteperMgr or create a new instance if an instance doesn't exist.
+     * @return Returns the current instance of the SorteperMgr.
+     */
     public static SorteperMgr getInstance() {
         if(instance == null) {
             instance = new SorteperMgr();
@@ -79,6 +83,10 @@ public class SorteperMgr extends KortspilMgr {
     
     public void slutSpil() {};
     
+    /** Get player by sessionId/userId
+     * @param sessionId A sessionID / userID
+     * @return Returns a player object. Returns null if player isn't found.
+     */
     public Spiller getSpiller(String sessionId) {
         Spiller returSpiller = null;
         for(Spiller s : spillerListe)
