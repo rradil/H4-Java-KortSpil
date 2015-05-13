@@ -107,6 +107,24 @@ public class XmlMgr {
         return sb.toString();
     }
     
+    /** Transform a simple response
+    * @Param Type
+    * @Param Status
+    * @returns <response type='@Type'>@Status</response>
+    */
+
+    public String transformResponse(String type, String status) {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append(getHeader());
+
+
+        sb.append("<response type='"+type+"'>"+status+"</response>");
+
+        return sb.toString();
+    }
+
+
     /** Get the XML header 
      * @return Returns the XML header used in all XML documents.
      */
