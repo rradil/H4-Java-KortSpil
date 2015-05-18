@@ -37,7 +37,7 @@ public class FjernStikServlet extends HttpServlet {
         ArrayList<Kort> ha = new ArrayList<Kort>();
         if (req.getParameter("uid") != null){
             userId = req.getParameter("uid");
-
+            // url:8080/sorteper/fjernstik?uid=1&kort1=8&kort2=7 For demo input data contained in url
             kort1 = Integer.parseInt(req.getParameter("kort1"));
             kort2 = Integer.parseInt(req.getParameter("kort2"));
             Spiller enSpiller = SorteperMgr.getInstance().getSpiller(userId);
