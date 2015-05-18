@@ -76,7 +76,7 @@ public class XmlMgr {
     public String transformCard(Kort card) {
         StringBuffer sb = new StringBuffer();
         sb.append(getHeader());
-        sb.append(transformCard(card));
+        sb.append(transformSingleCard(card));
         return sb.toString();
     }
     

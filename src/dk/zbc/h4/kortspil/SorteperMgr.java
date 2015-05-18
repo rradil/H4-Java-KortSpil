@@ -194,6 +194,34 @@ public class SorteperMgr extends KortspilMgr {
         // Return null if index is outside playerList bounds.
         return null;
     }
+
+    public void fjernStik(int kort1, int kort2, String userId){
+
+        ArrayList<Kort> kort = new ArrayList<>();
+        Kort kortHand1 = null;
+        Kort kortHand2 = null;
+        if (userId != null ){
+            if (getSpiller(userId).getHaand().get(kort1) != null){
+                kortHand1 = getSpiller(userId).getHaand().get(kort1);
+            }
+            if (getSpiller(userId).getHaand().get(kort2) != null){
+                kortHand2 = getSpiller(userId).getHaand().get(kort2);
+            }
+
+            kort = getSpiller(userId).getHaand();
+            if (kortHand1.getVaerdi() == kortHand2.getVaerdi()){
+                if (kort1 < kort2){
+                    kort.remove(kort1);
+                    kort.remove(kort2 -1);
+                }
+                else {
+                    kort.remove(kort1);
+                    kort.remove(kort2);
+                }
+            }
+
+        }
+    }
     
     public static void main(String[] args) {
         SorteperMgr.getInstance().startSpil();
