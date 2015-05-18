@@ -141,6 +141,7 @@ public class XmlMgr {
                 "        <kuloer>" + card.getKuloer() + "</kuloer>\n" +
                 "        <vaerdi>" + card.getVaerdi() + "</vaerdi>\n" +
                 "        </kort>";
+    }
         
     public String transformListSpillere(ArrayList<Spiller> spillerList) {
         StringBuffer sb = new StringBuffer();
