@@ -149,13 +149,13 @@ public class XmlMgr {
         sb.append("<spillere>");
         
         for (Spiller spiller : spillerList) {
-            sb.append("<person>\n" +
+            sb.append("<spiller>\n" +
                 "<navn>" + spiller.getNavn() + "</navn>" +
-                "<klar>" + spiller.erKlar() + "</klar>" +
+                "<klar>" + spiller.getKlar() + "</klar>" +
                 "<antalKort>" + (spiller.getHaand().size()) + "</antalKort>\n" +
-            "</person>");
+            "</spiller>");
         }
-        sb.append("</spiller>");
+        sb.append("</spillere>");
 
         return sb.toString();
 

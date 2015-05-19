@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FjernStikServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
-        //SorteperMgr.getInstance().startSpil();
+
     }
 
     @Override
@@ -35,19 +35,17 @@ public class FjernStikServlet extends HttpServlet {
         int kort2;
 
         ArrayList<Kort> ha = new ArrayList<Kort>();
-        if (req.getParameter("uid") != null){
-            userId = req.getParameter("uid");
+
+            userId = req.getSession().getId();
             // url:8080/sorteper/fjernstik?uid=1&kort1=8&kort2=7 For demo input data contained in url
             kort1 = Integer.parseInt(req.getParameter("kort1"));
             kort2 = Integer.parseInt(req.getParameter("kort2"));
             Spiller enSpiller = SorteperMgr.getInstance().getSpiller(userId);
-            // TODO  hardcoded Kort index!! skal rettes!
             System.err.println(req.getParameter("uid"));
             SorteperMgr.getInstance().fjernStik(kort1,kort2,userId);
             String content = XmlMgr.getInstance().transformCard(enSpiller.getHaand());
             resp.setContentType("text/xml");
             resp.getOutputStream().print(content);
-        }
 
     }
 

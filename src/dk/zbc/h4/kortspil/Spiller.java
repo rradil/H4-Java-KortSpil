@@ -29,8 +29,8 @@ public class Spiller {
     
     public void blivKlar(boolean klar) { this.klar = klar; }
 
-    public boolean erKlar() { return klar; }
-    
+    public boolean getKlar() { return klar; }
+    public void setKlar(boolean valg){this.klar = valg;}
 
     public Haand getHaand() { return hand; }
 

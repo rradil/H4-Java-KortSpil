@@ -27,7 +27,7 @@ public class Spilservlet extends HttpServlet {
         String sessionId = null;
         if(req.getParameter("uid")!= null) {
             sessionId = req.getParameter("uid");
-            Spiller nuvaerendeSpiller = SorteperMgr.getInstance().nuvaerendeSpiller();
+            Spiller nuvaerendeSpiller = SorteperMgr.getInstance().getCurrentPlayer();
             String content = XmlMgr.getInstance().transformNuvaerendeSpiller(nuvaerendeSpiller);
             resp.setContentType("text/xml");
             resp.getOutputStream().print(content);

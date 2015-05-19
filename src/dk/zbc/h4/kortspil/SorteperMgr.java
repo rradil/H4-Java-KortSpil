@@ -1,4 +1,6 @@
 package dk.zbc.h4.kortspil;
+import sun.security.provider.ConfigFile;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -11,10 +13,11 @@ import java.util.Random;
 public class SorteperMgr extends KortspilMgr {
     
     private static SorteperMgr instance = null;
-    private ArrayList<Spiller> spillerListe = null;
+
     
     private SorteperMgr() {
         spillerListe = new ArrayList<Spiller>();
+        minPlayers = 2;
     }
     
     /** Get the current instance of the SorteperMgr
@@ -27,57 +30,70 @@ public class SorteperMgr extends KortspilMgr {
         }
         return instance;
     }
-    
-    
+    public boolean everyoneReady() {
+        for(Spiller s : spillerListe) {
+            if (s.getKlar() == false)
+                    return false;
+            }
+        return true;
+    }
+    private Spiller currentPlayer = null;
+
+    public Spiller getCurrentPlayer(){
+        return currentPlayer;
+
+    }
+    public void setCurrentPlayer(){
+        currentPlayer = spillerListe.get(getNextPlayerIndex(currentPlayer));
+    }
+
+
     public void startSpil() {
-        
-        spillerListe.add(new Spiller("Niklas", "1"));
-        spillerListe.add(new Spiller("Daniel", "2"));
-        spillerListe.add(new Spiller("Patrick", "3"));
-        spillerListe.add(new Spiller("Louise", "4"));      
-        
-        Deck dk = new Deck();
-        for (int i = 1; i <= 13; i++) {
-            for(int kuloer = 1; kuloer <= 4; kuloer++) {
-                
-                
-                if(kuloer == 1) {
-                    dk.tilfoejKort(new Kort(i, Kort.Kuloer.HJERTER));
-                }else if(kuloer == 2) {
-                    dk.tilfoejKort(new Kort(i, Kort.Kuloer.KLOER));
-                }else if(kuloer == 3) {
-                    dk.tilfoejKort(new Kort(i, Kort.Kuloer.RUDER));
-                }else if(kuloer == 4) {
-                    dk.tilfoejKort(new Kort(i, Kort.Kuloer.SPAR));
+        currentPlayer = spillerListe.get(0);
+        if (minPlayers <= spillerListe.size()) {
+            Deck dk = new Deck();
+            for (int i = 1; i <= 13; i++) {
+                for (int kuloer = 1; kuloer <= 4; kuloer++) {
+
+
+                    if (kuloer == 1) {
+                        dk.tilfoejKort(new Kort(i, Kort.Kuloer.HJERTER));
+                    } else if (kuloer == 2) {
+                        dk.tilfoejKort(new Kort(i, Kort.Kuloer.KLOER));
+                    } else if (kuloer == 3) {
+                        dk.tilfoejKort(new Kort(i, Kort.Kuloer.RUDER));
+                    } else if (kuloer == 4) {
+                        dk.tilfoejKort(new Kort(i, Kort.Kuloer.SPAR));
+                    }
                 }
+
             }
-            
-        }
-        dk.tilfoejKort(new Kort(15, Kort.Kuloer.JOKER));
-        
-        // Shuffle
-        long seed = System.nanoTime();
-        Collections.shuffle(dk, new Random(seed));
-        //System.err.println(dk.size());
-        
-        int intCounter = 0;
-        
-        for (int i = 0; i< dk.size(); i++){
-            //Uddeler kort..
-            for(Spiller s : spillerListe){
-                //System.err.println(dk.size());
-                if(intCounter < dk.size()) {
-                    Kort k = dk.get(intCounter);
-                    s.getHaand().tilfoejKort(k);
-                    //dk.remove(i);
-                    intCounter++;
+            dk.tilfoejKort(new Kort(15, Kort.Kuloer.JOKER));
+
+            // Shuffle
+            long seed = System.nanoTime();
+            Collections.shuffle(dk, new Random(seed));
+            //System.err.println(dk.size());
+
+            int intCounter = 0;
+
+            for (int i = 0; i < dk.size(); i++) {
+                //Uddeler kort..
+                for (Spiller s : spillerListe) {
+                    //System.err.println(dk.size());
+                    if (intCounter < dk.size()) {
+                        Kort k = dk.get(intCounter);
+                        s.getHaand().tilfoejKort(k);
+                        //dk.remove(i);
+                        intCounter++;
+                    }
                 }
+                //dk.remove(i);
             }
-            //dk.remove(i);
+            dk.clear();
+
         }
-        dk.clear();
-        
-        
+
     }
     
     public void slutSpil() {};
@@ -97,18 +113,11 @@ public class SorteperMgr extends KortspilMgr {
         }
         return returSpiller;
     }
-    
-    // TODO Rewrite
-    public Spiller nuvaerendeSpiller() {
-        return spillerListe.get(0);
-    }
-    
-    public Spiller naesteSpiller() {
-        return spillerListe.get(1);
-    }
-    public ArrayList<Spiller> flytSpillere() {
-        return null;
-    }
+
+
+    //public Spiller naesteSpiller() {return spillerListe.;}
+
+    //public ArrayList<Spiller> flytSpillere() {return null;}
     
     /** Get playerList index number of previous player with cards
      * @param currentPlayer
@@ -227,7 +236,7 @@ public class SorteperMgr extends KortspilMgr {
         SorteperMgr.getInstance().startSpil();
     }
     
-    //Lister spillerene
+    //Lister spillerne
     public ArrayList<Spiller> listSpillere() {
         return spillerListe;        
     }

@@ -16,8 +16,8 @@ public class TilfoejSpillerServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        //TODO denne metode skal ikke kaldes her
-        SorteperMgr.getInstance().startSpil();
+
+
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,7 +39,6 @@ public class TilfoejSpillerServlet extends HttpServlet {
         String navn = req.getParameter("navn");
         if(!SorteperMgr.getInstance().spilStartet()) {
             if (navn != null) {
-                // TODO Tilføj bruger til spillerArray
                 Spiller spiller = new Spiller(navn, req.getSession().getId());
                 SorteperMgr.getInstance().tilfojSpiller(spiller);
                 resp.getWriter().print(XmlMgr.getInstance().transformResponse("success", "Spiller tilføjet"));

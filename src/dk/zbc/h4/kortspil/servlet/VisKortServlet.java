@@ -16,8 +16,8 @@ public class VisKortServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        //TODO denne metode skal ikke kaldes her
-        SorteperMgr.getInstance().startSpil();
+
+
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,9 +32,8 @@ public class VisKortServlet extends HttpServlet {
     // Outputs amount of cards for next player
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // TODO Get session ID of current player
         // Get current player
-        String sessionId = "1";
+        String sessionId = req.getSession().getId();
         Spiller thisSpiller = SorteperMgr.getInstance().getSpiller(sessionId);
         
         // Get next player
