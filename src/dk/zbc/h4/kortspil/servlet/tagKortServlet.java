@@ -32,44 +32,66 @@ public class tagKortServlet extends HttpServlet {
     
     // Outputs amount of cards for next player
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO Get session ID of current player
         // Get current player
-        String sessionId = "1";
-        Spiller thisSpiller = SorteperMgr.getInstance().getSpiller(sessionId);
+        String sessionId = req.getSession().getId();
+        Spiller thisPlayer = SorteperMgr.getInstance().getSpiller(sessionId);
         
         String content = "";
         int takenCardIdx = -1;
         
-        // Check if parameter was given
-        if(req.getParameter("card")!= null) {
-            
-            // Get card
-            takenCardIdx = Integer.parseInt(req.getParameter("card"));
-            
-            // Get previous player
-            int prevPlayerIdx = SorteperMgr.getInstance().getPreviousPlayerIndex(thisSpiller);
-            Spiller prevPlayer = SorteperMgr.getInstance().getPlayerByIndex(prevPlayerIdx);
-            
-            // Check takenCardIdx range (0 - prevPlayer card count)
-            if ((takenCardIdx >= 0) && (takenCardIdx <= (prevPlayer.getHaand().size() - 1))) {
+        // Cheating check. Check if this player is the current/active player
+        if (thisPlayer.equals(SorteperMgr.getInstance().getCurrentPlayer())) {
+            // Check if parameter was given
+            if(req.getParameter("card")!= null) {
                 
-                // Get card from previous player, transfer card, return card
-                Kort prevPlayerCard = prevPlayer.getHaand().get(takenCardIdx);
-                prevPlayer.getHaand().remove(prevPlayerCard);
-                thisSpiller.getHaand().add(prevPlayerCard);
-                content = XmlMgr.getInstance().transformCard(prevPlayerCard);
+                // Get card
+                try{
+                    takenCardIdx = Integer.parseInt(req.getParameter("card"));
+                }
+                catch(NumberFormatException e) {
+                    content = XmlMgr.getInstance().transformResponse("Error", "ParseInt failed! Card isn't a number!");
+                }
+                
+                // Check if parse was successful
+                if (takenCardIdx != -1)
+                {
+                    // Get previous player
+                    int prevPlayerIdx = SorteperMgr.getInstance().getPreviousPlayerIndex(thisPlayer);
+                    Spiller prevPlayer = SorteperMgr.getInstance().getPlayerByIndex(prevPlayerIdx);
+                    
+                    // Check if previous player is the same as the current player (1 player left)
+                    if (prevPlayer.equals(thisPlayer))
+                    {
+                        // Game possibly ended
+                        // TODO Check if game ended (?)
+                    }
+                    
+                    // Check takenCardIdx range (0 - prevPlayer card count)
+                    if ((takenCardIdx >= 0) && (takenCardIdx <= (prevPlayer.getHaand().size() - 1))) {
+                        
+                        // Get card from previous player, transfer card, return card
+                        Kort prevPlayerCard = prevPlayer.getHaand().get(takenCardIdx);
+                        prevPlayer.getHaand().remove(prevPlayerCard);
+                        thisPlayer.getHaand().add(prevPlayerCard);
+                        content = XmlMgr.getInstance().transformCard(prevPlayerCard);
+                    }
+                    else {
+                        // Return "Out of bounds" error (takenCardIdx)
+                        content = XmlMgr.getInstance().transformResponse("Error", "Card index out of bounds!\n"
+                                + "Min: 0, "
+                                + "Max: " + (prevPlayer.getHaand().size() - 1) + ", "
+                                + "Value: " + takenCardIdx + ".");
+                    }
+                }
             }
             else {
-                // Return "Out of bounds" error (takenCardIdx)
-                content = XmlMgr.getInstance().transformError("Card index out of bounds!\n"
-                        + "Min: 0, "
-                        + "Max: " + (prevPlayer.getHaand().size() - 1) + ", "
-                        + "Value: " + takenCardIdx + ".");
+                // Return "Card unspecified" error (parameter)
+                content = XmlMgr.getInstance().transformResponse("Error", "Card unspecified!");
             }
         }
         else {
-            // Return "Card unspecified" error (parameter)
-            content = XmlMgr.getInstance().transformError("Card unspecified!");
+            // Return "This player isn't the current player" error (validation)
+            content = XmlMgr.getInstance().transformResponse("Error", "It's not your turn!");
         }
         
         // Set content type & print

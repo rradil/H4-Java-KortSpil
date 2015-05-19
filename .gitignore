@@ -1,7 +1,7 @@
 # IntelliJ specific
 .idea/
 out/
-.iml
+*.iml
 
 # Netbeans specific
 # Everything in nbproject besides...
@@ -35,3 +35,4 @@ nb-configuration.xml
 hs_err_pid*
 
 build.xml
+doc/
