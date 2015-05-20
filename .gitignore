@@ -5,9 +5,7 @@ out/
 
 # Netbeans specific
 # Everything in nbproject besides...
-nbproject/*
-#!nbproject/project.properties
-#!nbproject/project.xml
+nbproject/
 build/
 nbbuild/
 dist/
